@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
+      - uses: actions/checkout@v3
       - name: download and install kicad
         run: |
           PCBPATH="ESPnow_Receiver.kicad_pcb"
@@ -19,7 +19,9 @@ jobs:
           sudo apt update
           sudo apt install kicad -y
           sudo apt-get install -y xvfb git python-wxtools
-          git clone https://github.com/openscopeproject/InteractiveHtmlBom.git 
+          git clone https://github.com/openscopeproject/InteractiveHtmlBom.git
+      - name: run InteractiveHtmlBom
+        run: |
           mkdir public
           CURRENTDIR=$(pwd)
           ls -la
