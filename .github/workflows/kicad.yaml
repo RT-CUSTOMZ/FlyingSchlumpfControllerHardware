@@ -10,7 +10,6 @@ jobs:
       - uses: actions/checkout@v3
       - name: download and install kicad
         run: |
-          ls -la
           sudo apt update && sudo apt upgrade
           sudo apt install software-properties-common -y
           sudo add-apt-repository ppa:kicad/kicad-6.0-releases -y
@@ -23,11 +22,7 @@ jobs:
           PCBPATH="ESPnow_Receiver.kicad_pcb"
           ARGS="--layer-view F"
           mkdir public
-          CURRENTDIR=$(pwd)
-          ls -la
-          xvfb-run --auto-servernum --server-args "-screen 0 1024x768x24" python InteractiveHtmlBom/InteractiveHtmlBom/generate_interactive_bom.py --no-browser $ARGS --dest-dir $CURRENTDIR/public $PCBPATH
-
-
+          xvfb-run --auto-servernum --server-args "-screen 0 1024x768x24" python InteractiveHtmlBom/InteractiveHtmlBom/generate_interactive_bom.py --no-browser ${ARGS} --dest-dir $(pwd)/public ${PCBPATH}
       - uses: actions/upload-artifact@v3
         with:
           name: InteractiveHtmlBom
