@@ -17,5 +17,13 @@ jobs:
           sudo apt update
           sudo apt install kicad -y
           sudo apt-get install -y xvfb git
-          git clone https://github.com/openscopeproject/InteractiveHtmlBom.git
-          
+          git clone https://github.com/openscopeproject/InteractiveHtmlBom.git 
+          mkdir public
+          CURRENTDIR=$(pwd)
+          xvfb-run --auto-servernum --server-args "-screen 0 1024x768x24" python2 InteractiveHtmlBom/InteractiveHtmlBom/generate_interactive_bom.py --no-browser $ARGS $PCBPATH --dest-dir $CURRENTDIR/public
+
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: InteractiveHtmlBom
+          path: public
