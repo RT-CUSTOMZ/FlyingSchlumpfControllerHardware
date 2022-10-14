@@ -10,8 +10,6 @@ jobs:
       - uses: actions/checkout@v3
       - name: download and install kicad
         run: |
-          PCBPATH="ESPnow_Receiver.kicad_pcb"
-          ARGS="--layer-view F"
           ls -la
           sudo apt update && sudo apt upgrade
           sudo apt install software-properties-common -y
@@ -22,6 +20,8 @@ jobs:
           git clone https://github.com/openscopeproject/InteractiveHtmlBom.git
       - name: run InteractiveHtmlBom
         run: |
+          PCBPATH="ESPnow_Receiver.kicad_pcb"
+          ARGS="--layer-view F"
           mkdir public
           CURRENTDIR=$(pwd)
           ls -la
