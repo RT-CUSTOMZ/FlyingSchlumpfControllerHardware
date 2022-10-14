@@ -8,7 +8,7 @@ jobs:
 
     steps:
 
-      - name: download and install boost
+      - name: download and install kicad
         run: |
           PCBPATH="ESPnow_Receiver.kicad_pcb"
           apt update && sudo apt upgrade
