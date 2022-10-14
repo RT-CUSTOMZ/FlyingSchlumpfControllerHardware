@@ -25,7 +25,7 @@ jobs:
           mkdir public
           CURRENTDIR=$(pwd)
           ls -la
-          xvfb-run --auto-servernum --server-args "-screen 0 1024x768x24" python InteractiveHtmlBom/InteractiveHtmlBom/generate_interactive_bom.py --no-browser $ARGS $PCBPATH --dest-dir $CURRENTDIR/public
+          xvfb-run --auto-servernum --server-args "-screen 0 1024x768x24" python InteractiveHtmlBom/InteractiveHtmlBom/generate_interactive_bom.py --no-browser $ARGS --dest-dir $CURRENTDIR/public $PCBPATH
 
 
       - uses: actions/upload-artifact@v3
