@@ -11,11 +11,11 @@ jobs:
       - name: download and install kicad
         run: |
           PCBPATH="ESPnow_Receiver.kicad_pcb"
-          apt update && sudo apt upgrade
-          apt install software-properties-common -y
-          add-apt-repository ppa:kicad/kicad-6.0-releases -y
-          apt update
-          apt install kicad -y
-          apt-get install -y xvfb git
+          sudo apt update && sudo apt upgrade
+          sudo apt install software-properties-common -y
+          sudo add-apt-repository ppa:kicad/kicad-6.0-releases -y
+          sudo apt update
+          sudo apt install kicad -y
+          sudo apt-get install -y xvfb git
           git clone https://github.com/openscopeproject/InteractiveHtmlBom.git
           
