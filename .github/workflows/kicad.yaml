@@ -1,0 +1,21 @@
+name: Kicad CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: download and install boost
+        run: |
+          PCBPATH="ESPnow_Receiver.kicad_pcb"
+          apt update && sudo apt upgrade
+          apt install software-properties-common -y
+          add-apt-repository ppa:kicad/kicad-6.0-releases -y
+          apt update
+          apt install kicad -y
+          apt-get install -y xvfb git
+          git clone https://github.com/openscopeproject/InteractiveHtmlBom.git
+          
