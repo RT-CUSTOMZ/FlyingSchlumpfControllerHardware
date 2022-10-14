@@ -1,0 +1,39 @@
+name: Kicad CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: download and install kicad
+        run: |
+          sudo apt update && sudo apt upgrade
+          sudo apt install software-properties-common -y
+          sudo add-apt-repository ppa:kicad/kicad-6.0-releases -y
+          sudo apt update
+          sudo apt install -y \
+            kicad \
+            xvfb \
+            git \
+            python-wxtools
+      - name: run InteractiveHtmlBom
+        run: |
+          git clone https://github.com/openscopeproject/InteractiveHtmlBom.git
+          PCBPATH="ESPnow_Receiver.kicad_pcb"
+          ARGS="--layer-view F"
+          mkdir public
+          xvfb-run \
+            --auto-servernum \
+            --server-args "-screen 0 1024x768x24" \
+            python InteractiveHtmlBom/InteractiveHtmlBom/generate_interactive_bom.py \
+              --no-browser \
+              ${ARGS} \
+              --dest-dir $(pwd)/public \
+              ${PCBPATH}
+      - uses: actions/upload-artifact@v3
+        with:
+          name: InteractiveHtmlBom
+          path: public
