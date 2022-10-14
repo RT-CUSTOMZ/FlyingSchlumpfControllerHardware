@@ -11,6 +11,7 @@ jobs:
       - name: download and install kicad
         run: |
           PCBPATH="ESPnow_Receiver.kicad_pcb"
+          ARGS="--layer-view F"
           sudo apt update && sudo apt upgrade
           sudo apt install software-properties-common -y
           sudo add-apt-repository ppa:kicad/kicad-6.0-releases -y
@@ -20,7 +21,7 @@ jobs:
           git clone https://github.com/openscopeproject/InteractiveHtmlBom.git 
           mkdir public
           CURRENTDIR=$(pwd)
-          xvfb-run --auto-servernum --server-args "-screen 0 1024x768x24" python2 InteractiveHtmlBom/InteractiveHtmlBom/generate_interactive_bom.py --no-browser $ARGS $PCBPATH --dest-dir $CURRENTDIR/public
+          xvfb-run --auto-servernum --server-args "-screen 0 1024x768x24" python InteractiveHtmlBom/InteractiveHtmlBom/generate_interactive_bom.py --no-browser $ARGS $PCBPATH --dest-dir $CURRENTDIR/public
 
 
       - uses: actions/upload-artifact@v3
