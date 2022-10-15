@@ -37,3 +37,17 @@ jobs:
         with:
           name: InteractiveHtmlBom
           path: public
+      - name: run kiauto
+        run: |
+          apt install -y \
+            python-is-python3 \
+            python3-pip \
+            xdotool
+          pip3 install kiauto
+          eeschema_do export \
+            -a ESPnow_Receiver.kicad_sch \
+            schematics/
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Schematics
+          path: schematics
